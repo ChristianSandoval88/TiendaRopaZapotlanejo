@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="ventas"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="842"
+		 pageHeight="595"
+		 columnWidth="782"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="ARG" isForPrompting="false" class="java.lang.Object"/>
+	<queryString><![CDATA[SELECT 
+CLOSEDCASH.HOST,
+CLOSEDCASH.MONEY,
+CLOSEDCASH.DATEEND,
+PRODUCTS.REFERENCE,
+PRODUCTS.NAME,
+SUM(PRODUCTSOUT.UNITS) AS UNITS,
+SUM(PRODUCTSOUT.UNITS * PRODUCTSOUT.PRICE) AS TOTAL 
+FROM CLOSEDCASH, TICKETS, PRODUCTSOUT LEFT OUTER JOIN PRODUCTS ON PRODUCTSOUT.PRODUCT = PRODUCTS.REFERENCE 
+WHERE CLOSEDCASH.MONEY = TICKETS.MONEY AND TICKETS.TICKETID = PRODUCTSOUT.TICKETID 
+GROUP BY CLOSEDCASH.HOST, CLOSEDCASH.MONEY, CLOSEDCASH.DATEEND, PRODUCTS.REFERENCE, PRODUCTS.NAME
+ORDER BY PRODUCTS.REFERENCE, CLOSEDCASH.HOST, CLOSEDCASH.DATEEND]]></queryString>
+
+	<field name="CODE" class="java.lang.String"/>
+	<field name="NAME" class="java.lang.String"/>
+	<field name="UNITS" class="java.lang.Double"/>
+	<field name="REASON" class="java.lang.String"/>
+	<field name="FECHA" class="java.util.Date"/>
+	<field name="PROVEEDOR" class="java.lang.String"/>
+	<field name="ALMACEN" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="14"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="96"
+						y="0"
+						width="230"
+						height="13"
+						key="staticText-1"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[PRODUCTO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="492"
+						y="0"
+						width="95"
+						height="13"
+						key="staticText-3"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[RAZON]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="0"
+						width="96"
+						height="13"
+						key="staticText-4"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[CODIGO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="449"
+						y="0"
+						width="43"
+						height="13"
+						key="staticText-6"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[UNIDADES]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="326"
+						y="0"
+						width="123"
+						height="13"
+						key="staticText-7"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[FECHA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="587"
+						y="0"
+						width="94"
+						height="13"
+						key="staticText-8"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[OBRA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="681"
+						y="0"
+						width="101"
+						height="13"
+						key="staticText-9"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[PROVEEDOR]]></text>
+				</staticText>
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="14"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="96"
+						y="0"
+						width="230"
+						height="13"
+						key="textField-2"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="492"
+						y="0"
+						width="95"
+						height="13"
+						key="textField-4"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REASON}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="96"
+						height="13"
+						key="textField-5"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{CODE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="449"
+						y="0"
+						width="43"
+						height="13"
+						key="textField-7"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[com.openbravo.format.Formats.DOUBLE.formatValue($F{UNITS})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="326"
+						y="0"
+						width="123"
+						height="13"
+						key="textField-8"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[com.openbravo.format.Formats.TIMESTAMP.formatValue($F{FECHA})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="587"
+						y="0"
+						width="94"
+						height="13"
+						key="textField-9"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ALMACEN}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="681"
+						y="0"
+						width="101"
+						height="13"
+						key="textField-10"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{PROVEEDOR}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

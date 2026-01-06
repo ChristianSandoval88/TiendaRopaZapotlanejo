@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="ticketsample"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="892"
+		 columnWidth="535"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="SUBREPORT_DIR" isForPrompting="true" class="java.lang.String">
+		<defaultValueExpression ><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<field name="TICKET" class="com.openbravo.pos.ticket.TicketInfo"/>
+	<field name="METODO" class="java.lang.String"/>
+	<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+                <detail>
+		<band height="850" isSplitAllowed="true">
+			<staticText>
+				<reportElement key="staticText-10" x="10" y="1" width="212" height="25" />
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[NOTA DE VENTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-4" x="10" y="28" width="60" height="21" />
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-3" x="70" y="28" width="156" height="21" />
+				<textFieldExpression><![CDATA[$F{TICKET}.printDate()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-3" x="11" y="48" width="59" height="16" />
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TICKET]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-2" x="70" y="48" width="156" height="16" />
+				<textFieldExpression><![CDATA[$F{TICKET}.printId()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-4" x="10" y="68" width="60" height="21" />
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[VENDEDOR]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-2" x="70" y="68" width="156" height="16"/>
+				<textFieldExpression><![CDATA[$F{TICKET}.getUser().getName()]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+				<reportElement key="barcode-1" x="285" y="1" width="262" height="138"/>
+				<graphicElement fill="Solid"/>
+				<imageExpression><![CDATA["C:\\pv\\logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement key="staticText-11" x="11" y="90" width="62" height="16"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-4" x="73" y="90" width="159" height="19" >
+					<printWhenExpression><![CDATA[Boolean.valueOf($F{TICKET}.getCustomer() != null)]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{TICKET}.getCustomer().getName()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-12" x="11" y="110" width="62" height="16"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOMICILIO]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-8" x="73" y="110" width="159" height="19">
+					<printWhenExpression><![CDATA[Boolean.valueOf($F{TICKET}.getCustomer() != null)]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{TICKET}.getCustomer().getAddress()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-130" x="11" y="130" width="62" height="16"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELEFONO]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-9" x="73" y="130" width="159" height="19">
+					<printWhenExpression><![CDATA[Boolean.valueOf($F{TICKET}.getCustomer() != null)]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{TICKET}.getCustomer().getPhone()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-130" x="307" y="150" width="62" height="16"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EMAIL]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-121" x="369" y="150" width="150" height="16"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TICKET}.getCustomer().getEmail()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-132" x="307" y="170" width="62" height="16"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MÉTODO]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-14" x="369" y="170" width="150" height="16"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{METODO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-7" x="390" y="719" width="140" height="19"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TICKET}.printTotal()]]></textFieldExpression>
+			</textField>
+			<subreport  isUsingCache="true">
+					<reportElement
+						x="10"
+						y="200"
+						width="517"
+						height="222"
+						key="subreport-1"/>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(
+$F{TICKET}.getLines()
+)]]></dataSourceExpression>
+					<subreportExpression  class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperCompileManager.compileReport(
+net.sf.jasperreports.engine.xml.JRXmlLoader.load(getClass().getResourceAsStream(
+"/com/openbravo/reports/ticketsample_lines.jrxml"
+))
+)]]></subreportExpression>
+				</subreport>
+			<staticText>
+				<reportElement key="staticText-4" x="330" y="719" width="60" height="21"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="19"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>
