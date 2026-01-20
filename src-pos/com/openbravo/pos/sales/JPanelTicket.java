@@ -799,7 +799,11 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                 addTicketLine(product, getPorValue(), -product.getPriceSell());
 
             // Totals() Igual;
-            } else if (cTrans == ' ') {
+            } 
+            else if (cTrans == '/') {
+                buscar();
+            }
+            else if (cTrans == ' '||cTrans == '*') {
                 if (m_oTicket.getLinesCount() > 0) {
                     
                     if (closeTicket(m_oTicket, m_oTicketExt)) {
@@ -1815,13 +1819,16 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
     private void m_jListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jListActionPerformed
 
+        buscar();
+        
+    }//GEN-LAST:event_m_jListActionPerformed
+    private void buscar()
+    {
         ProductInfoExt prod = JProductFinder.showMessage(JPanelTicket.this, dlSales);    
         if (prod != null) {
             buttonTransition(prod);
         }
-        
-    }//GEN-LAST:event_m_jListActionPerformed
-
+    }
     private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
 
         JCustomerFinder finder = JCustomerFinder.getCustomerFinder(this, dlCustomers);
@@ -2188,7 +2195,7 @@ if ((this.m_oTicket.getLinesCount() > 0))
         if (m_oTicket.getLinesCount() > 0) {
             if(m_oTicket.getTicketType()==TicketInfo.RECEIPT_NORMAL)
             {
-                    for(int i = 0; i<m_oTicket.getLinesCount(); i++)
+                    /*for(int i = 0; i<m_oTicket.getLinesCount(); i++)
                     {
                         Double inventario = 1.00;
                         try {
@@ -2210,7 +2217,7 @@ if ((this.m_oTicket.getLinesCount() > 0))
                                     return;
                             }
                     }
-            }
+            }*/
                     if (closeTicket(m_oTicket, m_oTicketExt)) {
                         // Ends edition of current receipt
                         m_ticketsbag.deleteTicket();  
@@ -2221,6 +2228,7 @@ if ((this.m_oTicket.getLinesCount() > 0))
                 } else {
                     Toolkit.getDefaultToolkit().beep();
                 }
+        }
     }//GEN-LAST:event_btnCustomer2ActionPerformed
 
     private void m_jbtnScale1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jbtnScale1ActionPerformed
